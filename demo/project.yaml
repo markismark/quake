@@ -1,0 +1,34 @@
+version: 1.0 # 数据版本
+name: my-project
+thread: 10
+thread-step : 2 # 线程启动步长，逐渐的提高速度
+duration: 100 # num 二选一，默认duration
+num: 100000
+data: !user.csv
+# random 随机 可能多个线程绑定使用同一个数据；
+# static 按照顺序，线程绑定唯一一个数据；
+# random-static 随机顺序,但是一个数据同时只能被一个线程使用；
+# 
+thread-data: random 
+
+env:
+  variables:
+    v: 1.0
+  cookies: dc=1608555966; ha=1608555966
+  header:
+    X-Test : 1
+    X-Token : testtoken
+
+# 启动之前初始化
+before:
+  action:
+    - login
+
+
+
+# 结束之后数据清理
+after:
+  action:
+    - clear
+
+
